@@ -11,7 +11,7 @@ import postcssNested from "postcss-nested";
 import postcssMixins from "postcss-mixins";
 import cssnano from "cssnano";
 import postcssUrl from "postcss-url";
-import { getConstants } from "./utils.js";
+import { getConstants, checkPath, showUsageIntructions } from "./utils.js";
 
 const { glob } = globPkg;
 
@@ -20,6 +20,10 @@ export default function createViteConfig(options) {
     getConstants(options);
   const staticFiles = glob.sync(`${staticPath}/**/*.{js,css}`, {
     ignore: ignoreFiles,
+  });
+
+  checkPath(staticPath).catch(() => {
+    showUsageIntructions();
   });
 
   return defineConfig({
