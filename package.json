@@ -1,6 +1,6 @@
 {
   "name": "@nuvexa/vite-build-config",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Custom Vite build configuration for static asset management in web applications. Easily integrate with any framework like Django, Flask, or FastAPI.",
   "main": "index.js",
   "type": "module",
