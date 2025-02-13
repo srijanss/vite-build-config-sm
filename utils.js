@@ -4,7 +4,7 @@ import {
   IGNORE_FILES,
   FONT_DIR,
   IMAGE_DIR,
-} from "./constants";
+} from "./constants.js";
 
 export function getConstants(options) {
   let { staticPath, outputDir, ignoreFiles, fontDir, imageDir } = options || {};

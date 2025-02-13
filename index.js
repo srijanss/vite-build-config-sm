@@ -11,7 +11,7 @@ import postcssNested from "postcss-nested";
 import postcssMixins from "postcss-mixins";
 import cssnano from "cssnano";
 import postcssUrl from "postcss-url";
-import { getConstants } from "./utils";
+import { getConstants } from "./utils.js";
 
 const { glob } = globPkg;
 
