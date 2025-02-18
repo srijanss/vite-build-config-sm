@@ -1,17 +1,18 @@
-import legacy from "@vitejs/plugin-legacy";
-import { defineConfig } from "vite";
-import path from "node:path";
-import globPkg from "glob";
-import { fileURLToPath } from "node:url";
-import postcssPresetEnv from "postcss-preset-env";
-import postcssFlexbugsFixes from "postcss-flexbugs-fixes";
+import { checkPath, getConstants, showUsageIntructions } from "./utils.js";
 import autoprefixer from "autoprefixer";
-import postcssImport from "postcss-import";
-import postcssNested from "postcss-nested";
-import postcssMixins from "postcss-mixins";
 import cssnano from "cssnano";
+import { defineConfig } from "vite";
+import { fileURLToPath } from "node:url";
+// eslint-disable-next-line import/no-unresolved
+import globPkg from "glob";
+import legacy from "@vitejs/plugin-legacy";
+import path from "node:path";
+import postcssFlexbugsFixes from "postcss-flexbugs-fixes";
+import postcssImport from "postcss-import";
+import postcssMixins from "postcss-mixins";
+import postcssNested from "postcss-nested";
+import postcssPresetEnv from "postcss-preset-env";
 import postcssUrl from "postcss-url";
-import { getConstants, checkPath, showUsageIntructions } from "./utils.js";
 
 const { glob } = globPkg;
 
@@ -38,17 +39,13 @@ export default function createViteConfig(options) {
     css: {
       postcss: {
         plugins: [
-          postcssPresetEnv({
-            stage: 1,
-          }),
           postcssFlexbugsFixes,
-          autoprefixer,
           postcssImport,
           postcssNested,
           postcssMixins,
-          cssnano({
-            preset: "default",
-          }),
+          postcssPresetEnv({ stage: 1 }),
+          autoprefixer,
+          cssnano({ preset: "default" }),
           postcssUrl({
             url: "rebase",
             assetsPath: "",
@@ -82,7 +79,9 @@ export default function createViteConfig(options) {
             entryFileNames: "js/[name]-[hash].js",
             assetFileNames: (assetInfo) => {
               const isCSS = assetInfo.name.endsWith(".css");
-              if (isCSS) return `css/[name]-[hash].css`;
+              if (isCSS) {
+                return `css/[name]-[hash].css`;
+              }
               return `assets/[name]-[hash][extname]`;
             },
           },
